@@ -1,0 +1,12 @@
+Build a project in Python that spins up 'job seeker' agents and 'job creator' agents that interact with each other.  
+
+Each 'job seeker' will represent a person with a work history. 
+
+Each 'job creator' will have a job description it's trying to hire against. 
+
+The 'job creator' will inquire randomly with as many ‘job seekers’ as it takes to fill the role it’s hiring for, stopping after the threshold for the ‘secretary problem’ has been reached. 
+
+When a ‘job creator’ has made a choice, state which ‘job seeker’ was hired and why, then exit. The ‘job seeker’ must also exit and no longer be a part of the pool for other ‘job creators’ to evaluate. 
+
+Start with 100 'job seekers' each having its own unique work history and 10 'job creators' each having a unique job to hire against. 
+
