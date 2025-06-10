@@ -43,4 +43,4 @@ The program will:
 - Each job creator has a unique job description with required skills and experience
 - The hiring process uses the secretary problem (37% rule) to make optimal hiring decisions
 - Once a job seeker is hired, they are removed from the available candidate pool
-- The evaluation process considers both skill matches (70%) and experience matches (30%) 
+- The evaluation process considers both skill matches (70%) and experience matches (30%)

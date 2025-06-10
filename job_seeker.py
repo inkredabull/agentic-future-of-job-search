@@ -1,5 +1,30 @@
-from faker import Faker
 import random
+try:
+    from faker import Faker
+except ImportError:  # pragma: no cover - fallback when Faker is missing
+    class Faker:
+        """Simplified fallback faker used when the real library is unavailable."""
+
+        def company(self) -> str:
+            return random.choice([
+                "Acme Corp",
+                "Globex",
+                "Umbrella",
+                "Soylent",
+            ])
+
+        def job(self) -> str:
+            return random.choice([
+                "Engineer",
+                "Developer",
+                "Manager",
+                "Analyst",
+            ])
+
+        def word(self) -> str:
+            letters = "abcdefghijklmnopqrstuvwxyz"
+            return "".join(random.choice(letters) for _ in range(5))
+
 from typing import List, Dict
 
 class JobSeeker:
@@ -13,7 +38,7 @@ class JobSeeker:
         """Generate a random work history for the job seeker."""
         num_jobs = random.randint(1, 5)
         work_history = []
-        
+
         for _ in range(num_jobs):
             job = {
                 'company': self.faker.company(),
@@ -23,7 +48,7 @@ class JobSeeker:
                 'years_experience': random.randint(1, 15)
             }
             work_history.append(job)
-        
+
         return work_history
 
     def get_skills(self) -> List[str]:
@@ -38,4 +63,4 @@ class JobSeeker:
         return sum(job['years_experience'] for job in self.work_history)
 
     def __str__(self) -> str:
-        return f"JobSeeker {self.id} with {len(self.work_history)} jobs and {self.get_total_experience()} years experience" 
+        return f"JobSeeker {self.id} with {len(self.work_history)} jobs and {self.get_total_experience()} years experience"
