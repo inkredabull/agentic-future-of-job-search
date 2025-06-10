@@ -1,5 +1,30 @@
-from faker import Faker
 import random
+
+try:
+    from faker import Faker
+except ImportError:  # pragma: no cover - fallback when Faker is missing
+    class Faker:
+        """Simple fallback faker for environments without the ``faker`` package."""
+
+        def job(self) -> str:
+            return random.choice([
+                "Engineer",
+                "Developer",
+                "Manager",
+                "Analyst",
+            ])
+
+        def company(self) -> str:
+            return random.choice([
+                "Acme Corp",
+                "Globex",
+                "Umbrella",
+                "Soylent",
+            ])
+
+        def word(self) -> str:
+            letters = "abcdefghijklmnopqrstuvwxyz"
+            return "".join(random.choice(letters) for _ in range(5))
 import math
 from typing import List, Dict
 from job_seeker import JobSeeker
@@ -50,11 +75,11 @@ class JobCreator:
 
         # Calculate the optimal stopping point (37% rule)
         stopping_point = math.ceil(n * 0.37)
-        
+
         # First phase: observe and find the best candidate
         best_score = -1
         best_candidate = None
-        
+
         for i in range(stopping_point):
             score = self.evaluate_candidate(candidates[i])
             if score > best_score:
@@ -74,4 +99,4 @@ class JobCreator:
         return best_candidate
 
     def __str__(self) -> str:
-        return f"JobCreator {self.id} hiring for {self.job_description['title']} at {self.job_description['company']}" 
+        return f"JobCreator {self.id} hiring for {self.job_description['title']} at {self.job_description['company']}"
