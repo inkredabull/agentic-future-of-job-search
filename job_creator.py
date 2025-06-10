@@ -26,7 +26,7 @@ except ImportError:  # pragma: no cover - fallback when Faker is missing
             letters = "abcdefghijklmnopqrstuvwxyz"
             return "".join(random.choice(letters) for _ in range(5))
 import math
-from typing import List, Dict
+from typing import List, Dict, Optional
 from job_seeker import JobSeeker
 
 class JobCreator:
@@ -67,8 +67,11 @@ class JobCreator:
         seeker.is_hired = True
         self.hired_seeker = seeker
 
-    def find_best_candidate(self, candidates: List[JobSeeker]) -> JobSeeker:
-        """Use the secretary problem to find the best candidate."""
+    def find_best_candidate(self, candidates: List[JobSeeker]) -> Optional[JobSeeker]:
+        """Use the secretary problem to find the best candidate.
+
+        Returns the hired candidate or ``None`` if no suitable candidate is found.
+        """
         n = len(candidates)
         if n == 0:
             return None
